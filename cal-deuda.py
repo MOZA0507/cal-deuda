@@ -1,18 +1,8 @@
-n_tarjeta=input("Inserte su nombre de tarjeta: ")
-t_interes=int(input("Inserte tasa de interes: "))
-deuda=int(input("Ingrese su deuda actual: "))
-pago=int(input("Inserte el pago que desea realizar: "))
-cargos=int(input("Ingrese los nuevos cargos a su tarjeta: "))
+from funciones import crea_tarjeta, captura_nueva_deuda, generar_reporte, lista_tarjetas, pago_recurrente
 
-interes_mensual= t_interes/12
-deuda_recalculada = (deuda-pago)*(1+interes_mensual)
-nueva_deuda = deuda_recalculada + cargos
-
-if pago>deuda:
-    print("\nusuario con tarjeta: {}".format(n_tarjeta))
-    print("No se puede realizar un pago mayor al total de la deuda pasada")
-else:
-    print("\nusuario con tarjeta: {}".format(n_tarjeta))
-    print("Pago: {}".format(pago))
-    print("Interes mensual: {}".format(interes_mensual))
-    print("Su nueva deuda: {}".format(nueva_deuda))
+datos = crea_tarjeta()
+datos = captura_nueva_deuda(datos)
+generar_reporte(datos)
+lista_tarjetas([{'num_tarjeta':'4582','t_interes': 5, 'deuda':1500,'pago':800,'cargos':1000},
+{'num_tarjeta':'4582','t_interes': 4, 'deuda':1800,'pago':900,'cargos':1000}])
+pago_recurrente(datos)
