@@ -1,4 +1,6 @@
 def crea_tarjeta():
+    """Función para crear una tarjeta nueva"""
+
     datos = {}
     n_tarjeta=input("Inserte su nombre de tarjeta: ")
     t_interes=int(input("Inserte tasa de interes: "))
@@ -15,10 +17,12 @@ def crea_tarjeta():
         datos["deuda"]=deuda
         datos["pago"]=pago
         datos["cargos"]=cargos
-    
+
     return datos
 
 def captura_nueva_deuda(tarjeta_data):
+    """Función para capturar una nueva deuda"""
+
     interes_mensual= tarjeta_data["t_interes"]/12
     deuda_recalculada = (tarjeta_data["deuda"]-tarjeta_data["pago"])*(1+interes_mensual)
     tarjeta_data["nueva_deuda"]= deuda_recalculada + tarjeta_data["cargos"]
@@ -26,19 +30,31 @@ def captura_nueva_deuda(tarjeta_data):
     return tarjeta_data
 
 def generar_reporte(tarjeta_data):
+    """Función que genera un reporte con los datos de un dict"""
+
     print("\n")
     for k,v in tarjeta_data.items():
         print("{} : {}".format(k,v))
 
-def lista_tarjetas(tarjetas):
-    for tarjeta in tarjetas:
-        captura_nueva_deuda(tarjeta)
-        generar_reporte(tarjeta)
 
 def pago_recurrente(tarjeta_data):
+    """Función que realiza un mismo pago hasta que la deuda vuelva a 0"""
+
     mes = 1
     while tarjeta_data["deuda"]>0:
         print(mes)
         generar_reporte(tarjeta_data)
         tarjeta_data["deuda"] = (tarjeta_data["deuda"]-tarjeta_data["pago"])
         mes+=1
+
+def pagos_diferentes(tarjeta_data):
+    """Función que deposita diferentes pagos programados por el numero de meses seleccionados"""
+
+    pagos_meses=[]
+    meses=int(input("Insertar el número de meses que deseas pagar automáticamente: "))
+    print("Insertar los pagos a continuación: ")
+    for i in range(meses):
+        pagos_meses.append(int(input("{} : ".format(i+1))))
+    for pago in pagos_meses:
+        tarjeta_data["pago"] = pago
+        generar_reporte(tarjeta_data)
