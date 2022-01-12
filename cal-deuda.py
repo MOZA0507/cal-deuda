@@ -1,5 +1,5 @@
 from calculadora.tarjeta import Tarjeta
-from calculadora.tarjeta import Tarjeta
+from calculadora.tarjeta_servicios import Tarjeta_Servicios
 from calculadora.usuario import Usuario
 
 tarjeta = Tarjeta()
@@ -12,5 +12,14 @@ user = Usuario("Marlon",tarjetas)
 user.añadir_tarjetas()
 user.lista_tarjetas()
 print(user)
+
+datos = {}
+tarjeta_s=Tarjeta_Servicios(datos)
+tarjeta_s.crea_tarjeta()
+tarjeta_s.captura_nueva_deuda()
+tarjeta_s.pagos_diferentes()
+
+
+
 
 
