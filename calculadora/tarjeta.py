@@ -1,3 +1,6 @@
+import csv
+import json
+
 class Tarjeta():
 
     def __init__(self,datos):
@@ -61,3 +64,19 @@ class Tarjeta():
         for pago in pagos_meses:
             self.datos["pago"] = pago
             self.generar_reporte()
+
+    def crear_csv_tarjeta(self):
+        with open("tarjeta.csv",'w') as f:
+            writer = csv.writer(f)
+            for k,v in self.datos.items():
+                writer.writerow([k,v])
+    
+    def crear_json(self):
+        json_object = json.dumps(self.datos,indent=4)
+        with open("tarjeta.json",'w') as outfile:
+            outfile.write(json_object)
+    
+    def json_a_dic(self):
+        with open("tarjeta.json") as outfile:
+            data = json.load(outfile)
+            print(data)

@@ -1,3 +1,4 @@
+import csv
 
 class Usuario():
     def __init__(self, name, tarjetas):
@@ -22,3 +23,11 @@ class Usuario():
         for tarjeta in self.tarjetas:
             print("{}: {}".format(i,tarjeta))
             i+=1
+
+    def crear_csv(self):
+        header = []
+        header.append(self.name)
+        with  open("usuario.csv",'w') as f:
+            writer = csv.writer(f)
+            writer.writerow(header)
+            writer.writerow(self.tarjetas)
